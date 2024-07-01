@@ -5,8 +5,20 @@ let currentInputLength = 0;
 // Listen for keydown events on the document
 document.addEventListener('keydown', function(event) {
     const key = event.key;
-    if (isOperator(key) || isDecimal(key) || isDigit(key)) {
-        appendToDisplay(key);
+    if (isOperator(key) || isDecimal(key) || isDigit(key) || key === 'x' || key === 'm' || key === 'd' || key === 'p' || key === 'a') {
+        if (key === 'x') {
+            appendToDisplay('*');   
+        } else if(key === 'm') {
+            appendToDisplay('-');
+        } else if(key === 'd'){
+            appendToDisplay('/')
+        } else if(key === 'p'){
+            appendToDisplay('%')
+        } else if(key === 'a'){
+            appendToDisplay('+');
+        }else {
+            appendToDisplay(key);
+        }
     } else if (key === 'Enter') {
         calculate();
     } else if (key === 'Backspace') {
@@ -15,8 +27,11 @@ document.addEventListener('keydown', function(event) {
         clearDisplay();
     } else if (key === 'Escape') {
         clearDisplay();
+    } else if (key === 'i'){
+        calculate()
     }
 });
+
 
 function appendToDisplay(input){
     const lastChar = display.value.slice(-1);
